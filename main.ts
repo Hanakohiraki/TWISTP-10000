@@ -1,31 +1,39 @@
-// main.ts (สำหรับ Electron)
 import { app, BrowserWindow } from 'electron';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import * as path from 'path';
+import * as url from 'url';
 
-// กรณีใช้ ESM
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isDev = !app.isPackaged;
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
     height: 720,
-    fullscreen: true,
-    autoHideMenuBar: true,
     webPreferences: {
-      // preload: path.join(__dirname, 'preload.js') // ถ้ามี preload
-    }
+      preload: path.join(__dirname, 'preload.js'), // ใส่ถ้ามี preload
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
   });
 
-  // ❌ อย่าใช้ Dev server แล้ว
-  // win.loadURL('http://localhost:5173');
-
-  // ✅ โหลดไฟล์ index.html ที่ build แล้ว
-  win.loadFile(path.join(__dirname, 'dist', 'index.html'));
+  if (isDev) {
+    // เปิดเว็บเซิร์ฟเวอร์ตอน dev
+    win.loadURL('http://localhost:5173');
+    win.webContents.openDevTools(); // เปิด DevTools ให้อัตโนมัติ
+  } else {
+    // โหลดไฟล์จาก dist ตอน production
+    win.loadURL(
+      url.format({
+        pathname: path.join(__dirname, 'dist/index.html'),
+        protocol: 'file:',
+        slashes: true,
+      })
+    );
+  }
 }
 
 app.whenReady().then(() => {
   createWindow();
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
