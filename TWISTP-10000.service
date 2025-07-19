@@ -1,9 +1,9 @@
 [Unit]
-Description=TWI Station Boot Launcher
+Description=TWIStation PRO Boot Launcher
 After=multi-user.target
 
 [Service]
-ExecStart=/home/youruser/twi-launcher/build/twi-launcher
+ExecStart=/home/hanako/TWISTP-10000/build/TWISTP-10000
 Restart=always
 StandardInput=tty
 StandardOutput=journal
