@@ -1,0 +1,12 @@
+[Unit]
+Description=TWI Station Boot Launcher
+After=multi-user.target
+
+[Service]
+ExecStart=/home/youruser/twi-launcher/build/twi-launcher
+Restart=always
+StandardInput=tty
+StandardOutput=journal
+
+[Install]
+WantedBy=graphical.target
