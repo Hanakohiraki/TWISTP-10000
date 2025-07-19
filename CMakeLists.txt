@@ -3,6 +3,7 @@ project(TWISTP-10000)
 
 set(CMAKE_CXX_STANDARD 17)
 
+find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
