@@ -1,27 +1,17 @@
 {
   "name": "twistp-10000",
   "version": "1.0.0",
-  "description": "XMB-style UI for native game platform using Electron + React",
   "main": "main.ts",
   "scripts": {
-    "dev": "concurrently \"vite\" \"electron .\"",
-    "build": "vite build && electron-builder",
+    "dev": "vite",
+    "build": "vite build",
     "start": "electron ."
   },
-  "author": "Hanako Hiraki",
-  "license": "MIT",
-  "dependencies": {
-    "electron": "^30.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
   "devDependencies": {
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.7",
-    "concurrently": "^8.2.0",
-    "electron-builder": "^24.6.0",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.0",
-    "vite": "^5.2.0"
+    "electron": "^28.1.0",
+    "vite": "^7.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.4"
   }
 }
