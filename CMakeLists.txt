@@ -9,4 +9,4 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(TWISTP-10000 src/main.cpp)
-target_link_libraries(twi-launcher SDL2 SDL2_mixer GL GLEW)
+target_link_libraries(TWISTP-10000 SDL2 SDL2_mixer GL GLEW GLU)
