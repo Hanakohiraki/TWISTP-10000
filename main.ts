@@ -1,6 +1,10 @@
 // main.ts (สำหรับ Electron)
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// กรณีใช้ ESM
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -9,17 +13,19 @@ function createWindow() {
     fullscreen: true,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      // preload: path.join(__dirname, 'preload.js') // ถ้ามี preload
     }
   });
 
-  win.loadURL('http://localhost:5173'); // Dev mode
-  // win.loadFile(path.join(__dirname, 'dist/index.html')); // Prod mode
+  // ❌ อย่าใช้ Dev server แล้ว
+  // win.loadURL('http://localhost:5173');
+
+  // ✅ โหลดไฟล์ index.html ที่ build แล้ว
+  win.loadFile(path.join(__dirname, 'dist', 'index.html'));
 }
 
 app.whenReady().then(() => {
   createWindow();
-
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
@@ -28,39 +34,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
-
-// vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-export default defineConfig({
-  plugins: [react()],
-  root: './',
-  base: './',
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
-});
-
-// package.json
-{
-  "name": "twistp-10000",
-  "version": "1.0.0",
-  "main": "main.ts",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "start": "electron ."
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.0.0",
-    "electron": "^29.0.0",
-    "typescript": "^5.0.0",
-    "vite": "^7.0.0"
-  }
-}
