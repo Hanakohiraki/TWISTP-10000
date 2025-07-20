@@ -19,12 +19,12 @@ include_directories(
 
 target_link_libraries(TWISTP-10000
     ${SDL2_LIBRARIES}
-    ${SDL2_MIXER_LIBRARIES}
     ${SDL2_TTF_LIBRARIES}
+    ${SDL2_MIXER_LIBRARIES}
     ${OPENGL_LIBRARIES}
-    SDL2_mixer
-    SDL2_ttf
-    SDL2
-    GL
     GLEW
+    SDL2
+    SDL2_ttf
+    SDL2_mixer
+    GL
 )
